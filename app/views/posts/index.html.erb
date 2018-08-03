@@ -1,0 +1,93 @@
+
+<style>
+  img {
+    border-radius: 50%;}
+    .card-panel {
+    display:inline-block;
+    width:500px;
+}
+.btnn{
+  text-decoration:none;
+  background-color:white;
+  border:none;
+  outline:none;
+}
+</style>
+<!--<p id="notice"><%= notice %></p>-->
+<br>
+
+
+
+
+    <% @posts.each do |post| %>
+    <div class="row">
+    <div class="col s12 m5">
+      <div class="card-panel">
+        <span class="black-text">
+      
+       
+        <%= User.find(post.user).name %>
+         <img src="<%= User.find(post.user).avatar.url %>" width="50" height="50" >
+
+      
+
+          <br>
+          <blockquote>
+        <%= post.content %>
+        </blockquote>
+        <grey-text>
+        <div class="source">
+        <%= post.source %>
+        </div>
+        </grey-text>
+       
+        <p>
+          <%if current_user.has_like?(post)%>
+            <form action = '/post/<%= post.id%>/like' method='post'>
+              <button class="waves-effect waves-light btn">좋아요</button>
+            </form>
+          <%else%>
+            <form action='/post/<%=post.id%>/like' method='post'>
+              <button class="waves-effect waves-light btn">안좋아요</button>
+            </form>
+  
+          <% end %>
+          <strong>Like:</strong>
+          <%= post.likes.size %>명이 좋아합니다.
+        </p>
+        <br>
+        <% if post.user == current_user%>
+        
+        <%= link_to 'Edit', edit_post_path(post) %>
+        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+        
+       
+      <%end%>
+      
+      <%=form_tag("/posts/#{post.id}/comments/create", method: "post", remote: true) do%>
+      <%=text_field_tag "content", nil, placeholder:"comment"%>
+      <%=submit_tag "write", class:"btnn"%><br><br>
+      <%= render partial: "post", object: post %>
+      <%end%>
+      
+      <%post.comments.each do |comment|%>
+      <%= User.find(comment.user_id).name %> )
+      <%= comment.content%>
+      <br>
+      <%= link_to 'delete', "/posts/#{post.id}/comments/destroy/#{comment.id}"%>
+      <%= link_to 'modify', "/posts/#{post.id}/comments/edit/#{comment.id}"%>
+      <br>
+      <%end%>
+       
+        </span>
+      </div>
+    </div>
+  </div>
+      <% end %>
+
+    
+  
+
+
+<%= link_to 'New Post', new_post_path %>
+<a href='/posts/my_page'>my page</a>

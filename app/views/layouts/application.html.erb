@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" type="assets/파비콘.png" sizes="32x32" href="/파비콘.png" />
+
+  <title>Quoty</title>
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <link rel="shortcut icon" type="assets/파비콘.png" sizes="32x32" href="/파비콘.png" />
+
+    <nav>
+    <div class="nav-wrapper navbar-fixed z-depth-1">
+      <a href="https://hack1-guyoung.c9users.io" class="brand-logo center"><img src="assets/logo.png"></a>
+    </div>
+  </nav>
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large #1a237e">
+    <i class="large material-icons">add</i>
+  </a>
+  <ul>
+    <li> 
+      <a class="btn-floating red" href="/posts/new">
+                <i class="material-icons">create</i>
+              </a>
+    </li>
+    <li><a class="btn-floating yellow darken-1" href="/posts"><i class="material-icons">explore</i></a></li>
+    <li><a class="btn-floating green" href="users/edit"><i class="material-icons">person</i></a></li>
+    <li><a class="btn-floating blue" href="users/sign_out"><i class="material-icons">exit_to_app</i></a></li>
+  </ul>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+       
+  </script>
+
+<%= yield %>
+</body><footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">멋쟁이 사자처럼 @신촌톤</h5>
+                <p class="grey-text text-lighten-4">
+                  이화여자대학교 박한울<br>
+                  동국대학교 박현규<br>
+                  연세대학교 정구영
+                </p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2018 Copyright Quoty
+            </div>
+          </div>
+        </footer>
+</html>
+

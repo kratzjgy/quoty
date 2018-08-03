@@ -1,0 +1,85 @@
+<style>
+  .card-panel {
+    display:inline-block;
+    width:500px;
+  }
+</style>
+<%if user_signed_in? %>
+<%else%>
+<%= link_to "login", new_user_session_path %>
+<%= link_to "join", new_user_registration_path %>
+<%end%>
+<div class="info">
+    <div class="profile">
+      <div class="profile-image">
+        <!---이따 프로필 주소로 바꾸기---->
+        <img src="<%= current_user.avatar.url %>" alt="profile" width="140px" height="140px" class="circle z-depth-4">
+      </div>
+      <div class="name">
+        <h6><%= current_user.name %></h6>
+      </div>
+      <div class="status">
+        <p><%= current_user.intro %></p>
+      </div>
+    </div>
+  </div>
+  
+  
+      <div class="col s4"></div>
+      <div class="col s4">
+        
+        <% @posts.each do |post| %>
+        <% if post.user == current_user%>
+        <div class="my-posts">
+      <div class="card-panel">
+        <div class="more">
+          <!-- Dropdown Trigger -->
+          <a class='dropdown-trigger' href='#' data-target='dropdown1'><i class="material-icons">more_vert</i></a>
+        
+          <!-- Dropdown Structure -->
+          <ul id='dropdown1' class='dropdown-content'>
+            <li>
+                <%= link_to '수정', edit_post_path(post) %>
+            </li>
+            <li class="divider" tabindex="-1"></li>
+            <li><%= link_to '삭제', post, method: :delete, data: { confirm: '정말요?' } %></li>
+          </ul>
+        </div>
+        <%end%>
+        <% if post.user == current_user%>
+        <blockquote>
+          <span class="black-text">
+          <%= post.content %>
+          <hr>
+        </blockquote>
+        <div class="source">
+          <span class="grey-text">
+          <%= post.source %>
+          </span>
+          </div>
+          <%end%>
+          
+          
+        <div class="card-action">
+            </div>
+          </div>
+        </div>
+    
+      <% end %>
+      </div>
+        </div>
+        
+      </div>
+      <div class="col s4"></div>
+      
+      
+      
+   
+    
+<script>
+ $('.dropdown-trigger').dropdown();
+  
+   $(document).ready(function(){
+    $('.modal').modal();
+  });
+</script>

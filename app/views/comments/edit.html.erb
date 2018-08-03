@@ -1,0 +1,4 @@
+<%=form_tag("/posts/#{@comment.post_id}/comments/update/#{@comment.id}", method: "post") do%>
+<%=text_field_tag "content", nil, placeholder:"댓글", value:"#{@comment.content}"%>
+<%=submit_tag "댓글수정"%>
+<%end%>
